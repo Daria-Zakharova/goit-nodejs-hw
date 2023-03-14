@@ -1,4 +1,4 @@
-const {Schema, model, SchemaTypes} = require("mongoose");
+const {Schema, model, SchemaTypes, Types} = require("mongoose");
 const handleMongooseError = require("../utils/handle-mongoose-error");
 
 const contactSchema = new Schema({
@@ -21,7 +21,13 @@ const contactSchema = new Schema({
     owner: {
       type: SchemaTypes.ObjectId,
       ref: 'user',
-      required: true
+      required: true,
+      validate: {
+        validator: function(value) {
+            return Types.ObjectId.isValid(value);
+        },
+        message: 'invalid contact id',
+        }
     }
 });
 

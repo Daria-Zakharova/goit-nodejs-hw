@@ -4,7 +4,7 @@ const controllerWrap = controller => {
             await controller(req, res, next);
         }
         catch (err) {
-            // next(err);
+            next(err);
         }
     }
     return wrapper;

@@ -12,18 +12,13 @@ const getContactsList = async (req, res) => {
     res.json(await Contact.find(query, "", {skip, limit}).populate("owner", "email"));
 }
 
-const getContact = async (req, res, next) => {
-    try {
-        const query = getIdAndOwnerQuery(req);
-        const result = await Contact.findOne(query).populate("owner", "email");
-        if(!result) {
-            throw HttpError({status: 404});
-        }
-        res.json(result);
+const getContact = async (req, res) => {
+    const query = getIdAndOwnerQuery(req);
+    const result = await Contact.findOne(query).populate("owner", "email");
+    if(!result) {
+        throw HttpError({status: 404});
     }
-    catch (error) {
-        next(error);
-    }
+    res.json(result);
 }
 
 const addContact = async (req, res) => {
@@ -32,47 +27,32 @@ const addContact = async (req, res) => {
     res.status(201).json(result);
 }
 
-const deleteContact = async (req, res, next) => {
-    try {
-        const query = getIdAndOwnerQuery(req);
-        const result = await Contact.findOneAndRemove(query);
-        if (!result) {
-            throw HttpError({status: 404});
-        }
-        res.json({ message: "contact deleted" });
+const deleteContact = async (req, res) => {
+    const query = getIdAndOwnerQuery(req);
+    const result = await Contact.findOneAndRemove(query);
+    if (!result) {
+      throw HttpError({status: 404});
     }
-    catch (error) {
-        next(error);
-    }
+    res.json({ message: "contact deleted" });
 }
 
-const updateContact = async (req, res, next) => {
-    try {
-        const query = getIdAndOwnerQuery(req);
-        const result = await Contact.findOneAndUpdate(query, req.body, {new: true});
-        if (!result) {
-            throw HttpError({status: 404});
-        }
-        res.json(result);
+const updateContact = async (req, res) => {
+    const query = getIdAndOwnerQuery(req);
+    const result = await Contact.findOneAndUpdate(query, req.body, {new: true});
+    if (!result) {
+      throw HttpError({status: 404});
     }
-    catch (error) {
-        next(error);
-    }
+    res.json(result);
 }
 
-const updateFavorite = async (req, res, next) => {
-    try {
-        const query = getIdAndOwnerQuery(req);
-        const result = await Contact.findOneAndUpdate(query, req.body, {new: true});
-        if (!result) {
-            throw HttpError({status: 404});
-        }
-        res.json(result);
+const updateFavorite = async (req, res) => {
+    const query = getIdAndOwnerQuery(req);
+    const result = await Contact.findOneAndUpdate(query, req.body, {new: true});
+    if (!result) {
+      throw HttpError({status: 404});
     }
-    catch (error) {
-        next(error);
-    }
-}
+    res.json(result);
+};
 
 module.exports = {
     getContactsList: controllerWrap(getContactsList), 
