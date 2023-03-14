@@ -1,4 +1,4 @@
-const {Schema, model, SchemaTypes, Types} = require("mongoose");
+const {Schema, model, SchemaTypes} = require("mongoose");
 const handleMongooseError = require("../utils/handle-mongoose-error");
 
 const contactSchema = new Schema({
