@@ -22,12 +22,6 @@ const contactSchema = new Schema({
       type: SchemaTypes.ObjectId,
       ref: 'user',
       required: true,
-      validate: {
-        validator: function(value) {
-            return Types.ObjectId.isValid(value);
-        },
-        message: 'invalid contact id',
-        }
     }
 });
 

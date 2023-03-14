@@ -10,8 +10,7 @@ const resizeImg = require("../utils/resizeImg");
 
 const uploadDir = path.join(__dirname, "..", "public", "avatars");
 
-
-const register = async(req, res, next) => {
+const register = async(req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
     
@@ -32,7 +31,7 @@ const register = async(req, res, next) => {
     });
 }
 
-const login = async(req, res, next) => {
+const login = async(req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
 
@@ -41,6 +40,7 @@ const login = async(req, res, next) => {
     }
 
     const passwordIsValid = await bcrypt.compare(password, user.password);
+    
     if (!passwordIsValid) {
         throw HttpError({status: 401, message: "Email or password is wrong"});
     }
