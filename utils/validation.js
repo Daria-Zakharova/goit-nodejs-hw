@@ -31,6 +31,10 @@ const validation = {
         password: Joi.string().min(6).required(),
     }),
 
+    emailSchema: Joi.object ({
+        email: Joi.string().pattern(EMAIL_REGEXP).required(),
+    }).max(1),
+
     loginSchema: Joi.object ({
         email: Joi.string().pattern(EMAIL_REGEXP, {name: "invalid email"}).required(),
         password: Joi.string().min(6).required(),
