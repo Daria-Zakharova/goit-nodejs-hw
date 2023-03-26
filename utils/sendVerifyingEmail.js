@@ -1,7 +1,6 @@
 const { sendEmail } = require("./sendEmail");
 
 require("dotenv").config();
-require("dotenv").config();
 
 const {BASE_URL} = process.env;
 
